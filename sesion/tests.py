@@ -50,3 +50,28 @@ class TestSeguridad(unittest.TestCase):
         
         for contrasena_valida in contrasenas_validas:
             self.assertEqual(seguridad.validacionClave(contrasena_valida), True)
+    
+    def testRegistrarUsuarioValido(self):
+        usuarios = [
+            ['david@gmail.com', 'MiClave123'],
+            ['jose@hotmail.com', 'contraseNa1'],
+            ['jawil@dominio.com', 'Password123']
+        ]
+
+        for usuario in usuarios:
+            self.assertEqual(seguridad.registrarUsuario(usuario[0], usuario[1], usuario[1]), True)
+
+    def testRegistrarUsuarioInvalido(self):
+        usuarios = [
+            ['plainaddress', 'MiClave123'], # Clave es valida pero correo no
+            ['example@example.com', '1'], # Correo es valido pero clave no
+            ['example@example.com', '1111111'], # Clave es casi valida
+            ['123correo', '123clave'] # Ninguno es valido
+        ]
+
+        for usuario in usuarios:
+            self.assertNotEqual(seguridad.registrarUsuario(usuario[0], usuario[1], usuario[1]), True)
+
+        # test de contrasena diferente
+        for usuario in usuarios:
+            self.assertNotEqual(seguridad.registrarUsuario(usuario[0], usuario[1], 'diferente'), True)

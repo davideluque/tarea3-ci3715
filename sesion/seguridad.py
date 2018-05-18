@@ -59,4 +59,24 @@ class Seguridad:
             self.error_msg = "Clave invalida, la clave debe contener al menos un digito"
             return False
 
-        return True        
+        return True
+    
+    def registrarUsuario(self, eMail, claveUno, claveDos):
+
+        if not self.correoValido(eMail):
+            return "Correo electronico invalido, no cumple con el formato RFC 822"
+
+        if self.usuarioYaRegistrado(eMail):
+            return "Usuario ya existe"
+
+        if not self.coincidenClaves(claveUno, claveDos):
+            return "Clave invalida, las claves deben coincidir"
+
+        claveEsValida = self.validacionClave(claveUno)
+        
+        if claveEsValida:
+            claveCodificada = claveUno[::-1]	
+            self.usuariosRegistrados[eMail] = claveCodificada
+            return True
+
+        return self.error_msg
