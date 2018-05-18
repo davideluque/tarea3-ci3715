@@ -80,3 +80,22 @@ class Seguridad:
             return True
 
         return self.error_msg
+
+    def ingresarUsuario(self, eMail, clave):
+        
+        # Verificamos si el user existe
+        userValido = False
+        for mail in self.usuariosRegistrados:
+            if(mail == eMail):
+                userValido = True
+
+        claveValida = False
+        if(userValido and self.usuariosRegistrados[eMail] == clave[::-1]):
+            claveValida = True  
+
+        if not (userValido):
+            return "Usuario invalido"
+        elif not (claveValida):
+            return "Clave invalida"
+        if (userValido and claveValida):
+            return True    

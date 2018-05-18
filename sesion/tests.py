@@ -75,3 +75,20 @@ class TestSeguridad(unittest.TestCase):
         # test de contrasena diferente
         for usuario in usuarios:
             self.assertNotEqual(seguridad.registrarUsuario(usuario[0], usuario[1], 'diferente'), True)
+
+
+    def testIngresarUsuarioValido(self):
+      s = Seguridad()
+      usuarios = [
+        ['david@gmail.com', 'MiClave123'],
+        ['jose@hotmail.com', 'contraseNa1'],
+        ['jawil@dominio.com', 'Password123']
+      ]
+
+      # Registramos a los usuarios
+      for usuario in usuarios:
+      s.registrarUsuario(usuario[0], usuario[1], usuario[1])
+
+      # Intentamos iniciar sesion
+      for usuario in usuarios:
+      self.assertEqual(s.ingresarUsuario(usuario[0], usuario[1]), True)      
