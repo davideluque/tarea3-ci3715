@@ -87,8 +87,8 @@ class TestSeguridad(unittest.TestCase):
 
       # Registramos a los usuarios
       for usuario in usuarios:
-      s.registrarUsuario(usuario[0], usuario[1], usuario[1])
+        s.registrarUsuario(usuario[0], usuario[1], usuario[1])
 
       # Intentamos iniciar sesion
       for usuario in usuarios:
-      self.assertEqual(s.ingresarUsuario(usuario[0], usuario[1]), True)      
+        self.assertEqual(s.ingresarUsuario(usuario[0], usuario[1]), True)      
